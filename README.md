@@ -8,7 +8,7 @@ There are 4 functions that create iterators with lazy evaluation:
 - `linspace`: similar to Numpy's `linspace`
 - `logspace`: similar to Numpy's `logspace`
 
-The main defference with the Numpy functions is that the functions in this module provide iterators rather than arrays, but can be used to create arrays.
+The main defference with the Numpy functions is that the functions in this module return iterators rather than arrays, but can be used to create arrays.
 
 All the iterators have a `len` attribute.
 
