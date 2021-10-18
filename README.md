@@ -3,10 +3,10 @@
 This module offers functionality similar to Python. 
 
 There are 4 functions that create iterators with lazy evaluation:
-- `irange`: similar to Python's `range()` for integer numbers
-- `frange`: similar to Numpy's `arange` for floats
-- `linspace`: similar to Numpy's `linspace`
-- `logspace`: similar to Numpy's `logspace`
+- `int_iter`: similar to Python's `range()` for integer numbers
+- `float_iter`: similar to Numpy's `arange` for floats
+- `lin_iter`: similar to Numpy's `linspace`
+- `log_iter`: similar to Numpy's `logspace`
 
 The main defference with the Numpy functions is that the functions in this module return iterators rather than arrays, but can be used to create arrays.
 
@@ -14,10 +14,10 @@ All the iterators have a `len` attribute.
 
 ## Exemples
 
-### `irange`
+### `int_iter`
 
 ```v
-for i in irange(stop:5) {
+for i in int_iter(stop:5) {
 	println(i)
 }
 ```
@@ -30,7 +30,7 @@ for i in irange(stop:5) {
 ```
 -----------------
 ```v
-for i in irange(start:3, stop:23, step:4) {
+for i in int_iter(start:3, stop:23, step:4) {
 	println(i)
 }
 ```
@@ -43,7 +43,7 @@ for i in irange(start:3, stop:23, step:4) {
 ```
 ------------
 ```v
-for i in irange(start:5, stop:-10, step:-3) {
+for i in int_iter(start:5, stop:-10, step:-3) {
 	println(i)
 }
 ```
@@ -55,10 +55,10 @@ for i in irange(start:5, stop:-10, step:-3) {
 -7
 ```
 ------
-### `frange`
+### `float_iter`
 
 ```v
-for i in frange(start:1, stop:3, step:0.5) {
+for i in float_iter(start:1, stop:3, step:0.5) {
 	println(i)
 }
 ```
@@ -70,7 +70,7 @@ for i in frange(start:1, stop:3, step:0.5) {
 ```
 -------
 ```v
-for i in frange(stop:-1, step: -0.25) {
+for i in float_iter(stop:-1, step: -0.25) {
 	println(i)
 }
 ```
@@ -81,9 +81,9 @@ for i in frange(stop:-1, step: -0.25) {
 -0.75
 ```
 -------
-### `linspace`
+### `lin_iter`
 ```v
-for i in linspace(start: 0.5, stop: 1.25, len:5) {
+for i in lin_iter(start: 0.5, stop: 1.25, len:5) {
 	println(i)
 }
 ```
@@ -96,7 +96,7 @@ for i in linspace(start: 0.5, stop: 1.25, len:5) {
 ```
 ------
 ```v
-for i in linspace(start: 0.5, stop: 1.25, len:5, endpoint: false) {
+for i in lin_iter(start: 0.5, stop: 1.25, len:5, endpoint: false) {
 	println(i)
 }
 ```
@@ -108,9 +108,9 @@ for i in linspace(start: 0.5, stop: 1.25, len:5, endpoint: false) {
 1.1
 ```
 ------
-### `logspace`
+### `log_iter`
 ```v
-for i in logspace(start: 0, stop: 3, len:5){
+for i in log_iter(start: 0, stop: 3, len:5){
 	println(i)
 }
 ```
@@ -123,7 +123,7 @@ for i in logspace(start: 0, stop: 3, len:5){
 ```
 ------
 ```v
-for i in logspace(start: 0, stop: 3, len:5, base:2){
+for i in log_iter(start: 0, stop: 3, len:5, base:2){
 	println(i)
 }
 ```
@@ -138,7 +138,7 @@ for i in logspace(start: 0, stop: 3, len:5, base:2){
 ### `.len`
 
 ```v
-r := irange(stop:25, step:4)
+r := int_iter(stop:25, step:4)
 println('len: $r.len')
 ```
 ```console

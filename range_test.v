@@ -1,6 +1,6 @@
 module range
 
-fn test_irange(){
+fn test_int_iter(){
 	args := [[i64(27), 11, -5], 
     		 [i64(13), 1, -6], 
  	 		 [i64(-19), -35, -6], 
@@ -23,7 +23,7 @@ fn test_irange(){
 				[]i64{len:0}]
 
 	for i, values in args {
-		r := irange(start: values[0], stop: values[1], step:values[2])
+		r := int_iter(start: values[0], stop: values[1], step:values[2])
 		for j, n in r {
 			assert n == expected[i][j]
 		}
@@ -32,7 +32,7 @@ fn test_irange(){
 }
 
 
-fn test_frange() {
+fn test_float_iter() {
 	args := [[2.1245007882430293, 9.475733123176873, 2.2990402233671574],
 			[-7.058872968509806, 7.971784986016715, 1.98165413807058],
 			[-5.739216620975403, -0.3467859289458932, 2.2127178067713644],
@@ -55,7 +55,7 @@ fn test_frange() {
 				[]f64{}]
 
 	for i, values in args {
-		r := frange(start:values[0], stop:values[1], step:values[2])
+		r := float_iter(start:values[0], stop:values[1], step:values[2])
 		for j, n in r {
 			if !n.eq_epsilon(expected[i][j]) {
 				println('$n,  ${expected[i][j]}')
@@ -66,7 +66,7 @@ fn test_frange() {
 	}
 }
 
-fn test_linspace() {
+fn test_lin_iter() {
 	limits := [[1.2406537780235105, 11.347723458996064], [7.934211647857726, -3.7058956024157084], [10.244703943148405, -6.008335534940258], [-6.071150084691839, -5.846906010513566], [10.367120987381458, -9.851326072515677], [0.8136613633305672, -1.0730190759873128], [10.965127527440444, 8.068742222821108], [-0.7509669252729427, -2.9004178591848113], [-9.673319044566949, 3.705538702478055], [-8.129098138805718, 2.753071722916834], [1.9788425271898529, 10.207068414571822], [2.6478453874582932, -1.8392282826138064]]
 	lens := [2, 5, 6, 3, 2, 4, 5, 4, 4, 1, 2, 0]
 	endpoints := [true, true, false, true, false, true, false, true, false, false, true, false]
@@ -85,7 +85,7 @@ fn test_linspace() {
 				[]f64{}]
 	
 	for i, lim in limits {
-		l := linspace(start: lim[0], stop: lim[1], len:lens[i], endpoint:endpoints[i])
+		l := lin_iter(start: lim[0], stop: lim[1], len:lens[i], endpoint:endpoints[i])
 		for j, n in l {
 			assert n.eq_epsilon(expected[i][j])
 		}
