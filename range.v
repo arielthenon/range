@@ -58,7 +58,7 @@ struct FloatRange {
 	stop f64
 	step f64
 mut: 
-	current f64
+	i f64
 pub:
 	len i64
 }
@@ -74,16 +74,16 @@ pub fn frange(i FloatRangeInit) FloatRange {
 	return FloatRange{start: i.start,
 					stop: i.stop,
 					step: i.step,
-					current: i.start
+					i: 0
 					len: len}
 }
 
 pub fn (mut r FloatRange) next() ?f64{ 
-	if (r.stop -r.current) * r.step <= 0 {
+	if r.i == r.len {
 		return none
 	}
-	defer{ r.current += r.step}
-	return r.current
+	defer{ r.i ++}
+	return r.start + r.i * r.step
 }
 
 
