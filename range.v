@@ -20,19 +20,19 @@ pub:
 }
 
 
-pub fn int_iter(i IntIterParams) IntIter {
-	if i.step == 0 {
-		panic('range: step cannot be 0')
+pub fn int_iter(params IntIterParams) IntIter {
+	if params.step == 0 {
+		panic('int_iter: step cannot be 0')
 	}
 	
-	mut len := i64((i.stop - i.start)/i.step) + i64((i.stop - i.start)%i.step != 0)
+	mut len := i64((params.stop - params.start)/params.step) + i64((params.stop - params.start)%params.step != 0)
 	if len < 0 {
 		len = 0
 	}
 
-	return IntIter{start: i.start,
-					stop: i.stop,
-					step: i.step,
+	return IntIter{start: params.start,
+					stop: params.stop,
+					step: params.step,
 					i: 0
 					len: len}
 }
@@ -64,17 +64,17 @@ pub:
 	len i64
 }
 
-pub fn float_iter(i FloatIterParams) FloatIter {
-	if i.step == 0 {
-		panic('range: step cannot be 0')
+pub fn float_iter(params FloatIterParams) FloatIter {
+	if params.step == 0 {
+		panic('float_iter: step cannot be 0')
 	}
-	mut len := int((i.stop - i.start)/i.step) + int(math.fmod((i.stop - i.start), i.step) != 0)
+	mut len := int((params.stop - params.start)/params.step) + int(math.fmod((params.stop - params.start), params.step) != 0)
 	if len < 0 {
 		len = 0
 	}
-	return FloatIter{start: i.start,
-					stop: i.stop,
-					step: i.step,
+	return FloatIter{start: params.start,
+					stop: params.stop,
+					step: params.step,
 					i: 0
 					len: len}
 }
@@ -107,21 +107,21 @@ pub:
 	step f64
 }
 
-pub fn lin_iter(i LinIterParams) LinIter {
-	if i.len < 0 {
+pub fn lin_iter(params LinIterParams) LinIter {
+	if params.len < 0 {
 		panic('lin_iter: number of samples must be non negative')
 	}
 	mut step := f64(1)
-	if i.endpoint {
-		step = (i.stop - i.start)/(i.len-1)
+	if params.endpoint {
+		step = (params.stop - params.start)/(params.len-1)
 	} else {
-		step = (i.stop - i.start)/i.len
+		step = (params.stop - params.start)/params.len
 	}
-	return LinIter{start: i.start,
-					stop: i.stop,
+	return LinIter{start: params.start,
+					stop: params.stop,
 					step: step,
-					len: i.len,
-					endpoint: i.endpoint}
+					len: params.len,
+					endpoint: params.endpoint}
 }
 
 pub fn (mut o LinIter) next() ?f64 {
@@ -157,16 +157,16 @@ mut:
 	lin_iter LinIter
 }
 
-pub fn log_iter(i LogIterParams) LogIter {
-	if i.len < 0 {
+pub fn log_iter(params LogIterParams) LogIter {
+	if params.len < 0 {
 		panic('log_iter: number of samples must be non negative')
 	}
-	return LogIter {lin_iter: lin_iter(start: i.start,
-										stop: i.stop,
-										len: i.len,
-										endpoint: i.endpoint)
-					base: i.base,
-					len: i.len}
+	return LogIter {lin_iter: lin_iter(start: params.start,
+										stop: params.stop,
+										len: params.len,
+										endpoint: params.endpoint)
+					base: params.base,
+					len: params.len}
 }
 
 pub fn (mut o LogIter) next() ?f64 {
